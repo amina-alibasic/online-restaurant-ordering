@@ -7,7 +7,7 @@ if (isset($_GET['orderItemId'])) {
     }
 
     $orderItemId = $conn->real_escape_string($_GET['orderItemId']);
-    $deleteSql = "DELETE FROM StavkaNarudzbe WHERE id = $orderItemId";
+    $deleteSql = "DELETE FROM OrderItem WHERE id = $orderItemId";
 
     if ($conn->query($deleteSql) === TRUE) {
         echo "success";

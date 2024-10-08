@@ -11,18 +11,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (!empty($cartItems)) {
         // Insert into Order table
-        $datumNarudzbe = date('Y-m-d H:i:s');
-        $ukupnaCijena = array_sum(array_column($cartItems, 'price'));
-        $insertOrderSql = "INSERT INTO Narudzba (datumNarudzbe, ukupnaCijena) VALUES ('$datumNarudzbe', '$ukupnaCijena')";
+        $orderDate = date('Y-m-d H:i:s');
+        $totalPrice = array_sum(array_column($cartItems, 'price'));
+        $insertOrderSql = "INSERT INTO Order (orderDate, totalPrice) VALUES ('$orderDate', '$totalPrice')";
         
         if ($conn->query($insertOrderSql) === TRUE) {
             $orderId = $conn->insert_id;
 
             // Insert each item into OrderItem table
             foreach ($cartItems as $item) {
-                $meniStavkaId = $item['id'];
-                $kolicina = $item['quantity'];
-                $insertOrderItemSql = "INSERT INTO StavkaNarudzbe (idNarudzbe, meniStavkaId, kolicina) VALUES ('$orderId', '$meniStavkaId', '$kolicina')";
+                $menuItemId = $item['id'];
+                $quantity = $item['quantity'];
+                $insertOrderItemSql = "INSERT INTO OrderItem (orderId, menuItemId, quantity) VALUES ('$orderId', '$menuItemId', '$quantity')";
                 $conn->query($insertOrderItemSql);
             }
 
@@ -30,10 +30,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header("Location: ../homepage.php?orderSuccess=1");
             exit();
         } else {
-            echo "Greska: " . $conn->error;
+            echo "Error: " . $conn->error;
         }
     } else {
-        echo "Korpa je prazna!";
+        echo "Cart is empty!";
     }
 
     $conn->close();

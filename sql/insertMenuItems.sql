@@ -1,5 +1,5 @@
-INSERT INTO MeniStavka (ime, opis, cijena) VALUES 
-('Margarita', 'Pizza sa sirom', 8),
-('Burek', 'Pita s mesom', 10.95),
-('Pileca salata', 'Salata s piletinom, krastavcima, zelenom salaton i paradajzom', 6),
-('Teleca corba', 'Corba s teletinom i povrcem (mrkva, grasak)', 12.90);
+INSERT INTO MenuItem (name, description, price) VALUES 
+('Margarita', 'Cheese pizza', 8),
+('Burek', 'Meat pie', 10.95),
+('Chicken salad', 'Salad with chicken, cucumber, tomato and greek yoghurt', 6),
+('Beef soup', 'Soup with beef, beans and carrot', 12.90);

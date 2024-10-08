@@ -1,21 +1,21 @@
-CREATE TABLE IF NOT EXISTS MeniStavka (
+CREATE TABLE IF NOT EXISTS MenuItem (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    ime VARCHAR(100) NOT NULL,
-    opis TEXT,
-    cijena DECIMAL(10, 2) NOT NULL
+    name VARCHAR(100) NOT NULL,
+    description TEXT,
+    price DECIMAL(10, 2) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS Narudzba (
+CREATE TABLE IF NOT EXISTS Order (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    datumNarudzbe DATETIME NOT NULL,
-    ukupnaCijena DECIMAL(10, 2) NOT NULL
+    orderDate DATETIME NOT NULL,
+    totalPrice DECIMAL(10, 2) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS StavkaNarudzbe (
+CREATE TABLE IF NOT EXISTS OrderItem (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    idNarudzbe INT,
-    meniStavkaId INT,
-    kolicina INT NOT NULL,
-    FOREIGN KEY (idNarudzbe) REFERENCES Narudzba(id),
-    FOREIGN KEY (meniStavkaId) REFERENCES MeniStavka(id)
+    orderId INT,
+    menuItemId INT,
+    quantity INT NOT NULL,
+    FOREIGN KEY (orderId) REFERENCES Order(id),
+    FOREIGN KEY (menuItemId) REFERENCES MenuItem(id)
 );
